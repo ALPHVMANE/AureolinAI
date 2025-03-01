@@ -1,0 +1,14 @@
+Hello If you are reading this, it means you cant sign up your account =)))
+So, please follow my steps:
+1) Turn on XAMPP Control Panel, make sure MySQL is running fine
+2) go localhost/phpmyadmin/
+3) create new Database, name it "aureolin_test" go to SQL tab
+4) paste this code in it. 
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    face_image VARCHAR(255) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
