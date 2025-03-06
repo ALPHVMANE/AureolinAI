@@ -12,3 +12,6 @@ CREATE TABLE IF NOT EXISTS users (
     face_image VARCHAR(255) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+5) go to src/app/auth/auth.php
+6) change the servername, username, password, dbname
+Done
