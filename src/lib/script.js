@@ -19,7 +19,7 @@ function startWebcam() {
       audio: false,
     })
     .then((stream) => {
-      alert("Webcam started!");
+      alert("Webcam started! Please wait 30 seconds");
       video.srcObject = stream;
     })
     .catch((error) => {
