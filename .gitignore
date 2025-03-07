@@ -1,1 +1,4 @@
 env.php
+./src/features/immgen/img_get.php
+./src/features/immgen/img_put.php
+.\src\features\imggen\img_put.php
