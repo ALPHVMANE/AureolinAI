@@ -34,11 +34,11 @@ function callAPI($method, $url, $data, $headers = false) {
    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
-    // Execute request
+    // EXECUTE
     $result = curl_exec($curl);
         
     if (!$result) {
-        die("Connection Failure: " . curl_error($curl));
+        die("Connection Failure: ".curl_error($curl));
     }
     curl_close($curl);
 
