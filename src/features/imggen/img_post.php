@@ -1,10 +1,9 @@
 <?php 
 include '../../../config/API/imggen.ai/config.php';
-include '../../../env.php';
 if (defined('IMGGEN_URL')) {
-    echo IMGGEN_URL;
+    echo IMGGEN_URL."<br/>";
 } else {
-    echo "IMGGEN_URL is not defined.";
+    echo "IMGGEN_URL is not defined. <br/>";
 }
 $data_array =  [
     "prompt"       => "close up photo of a rabbit", 
@@ -31,6 +30,6 @@ if (isset($response['response']['errors'])) {
     }
 }
 
-// Print result for debugging
+// debugging
 print_r($response);
 ?>

@@ -8,12 +8,12 @@ function callAPI($method, $url, $data, $headers = false) {
             if ($data) 
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
             break;
-        case "PUT":
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-            if ($data)
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-            break;
-        default:
+        // case "PUT":
+        //     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+        //     if ($data)
+        //         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        //     break;
+        default: // for GET method
             if ($data) 
                 $url = sprintf("%s?%s", $url, http_build_query($data));
     }
@@ -21,19 +21,19 @@ function callAPI($method, $url, $data, $headers = false) {
    curl_setopt($curl, CURLOPT_URL, $url);
    if(!$headers){
        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-          'X-IMGGEN-KEY: IMGGEN_APIK',
+          'X-IMGGEN-KEY: '.IMGGEN_APIK,
           'Content-Type: application/json',
        ));
    }else{
        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-          'X-IMGGEN-KEY: IMGGEN_APIK',
+          'X-IMGGEN-KEY: '.IMGGEN_APIK,
           'Content-Type: application/json',
           $headers
        ));
    }
    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-   
+
     // Execute request
     $result = curl_exec($curl);
         
