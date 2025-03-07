@@ -1,5 +1,5 @@
 <?php
-include '../../../env.php';
+include 'C:/xampp2/htdocs/AureolinAI/env.php';
 function callAPI($method, $url, $data, $headers = false) {
     $curl = curl_init();
     switch (strtoupper($method)) {
@@ -44,3 +44,4 @@ function callAPI($method, $url, $data, $headers = false) {
 
     return json_decode($result, true);
 }
+?>

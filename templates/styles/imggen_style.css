@@ -1,0 +1,15 @@
+.imggen-container {
+    font-family: 'Poppins', sans-serif; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    width: 100vw; 
+    /* -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;  */
+    overflow: auto;
+}
+textarea {
+    resize: none;
+}
