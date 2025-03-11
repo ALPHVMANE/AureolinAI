@@ -14,4 +14,5 @@ CREATE TABLE IF NOT EXISTS users (
 );
 5) go to src/app/auth/auth.php
 6) change the servername, username, password, dbname
+7) do the same for src/app/features/faceid/capture_face.php line 31
 Done

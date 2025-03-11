@@ -10,7 +10,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 if (isset($data['image'])) {
     $username = $_SESSION['username'];
     $baseDir = '../../data/labels';
-    $userDir = $baseDir . $username . '/';
+    $userDir = $baseDir . '/' . $username . '/';
     $imagePath = $userDir . '1.png';
 
     // Create user folder if it doesn't exist
