@@ -10,7 +10,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: black;
-    background-image: url(../config/images/background-image.png);
+    background-image: url(../../public/images/background-image.png);
     background-size: cover;
     flex-direction: column;
 }

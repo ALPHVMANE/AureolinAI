@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login & Signup</title>
-    <link rel="stylesheet" href="../templates/styleindex.css">
+    <link rel="stylesheet" href="../templates/styles/styleindex.css">
 </head>
 <body>
 
     <div class="circle-link" style="margin-top: -35px;">
         <a href="../templates/faceLogin.html">
-            <img src="../config/images/faceid.png"alt="Face ID" style = "width:40px; height: 40px; margin-top: 5px;">
+            <img src="../public/images/faceid.png"alt="Face ID" style = "width:40px; height: 40px; margin-top: 5px;">
         </a>
     </div>
 
