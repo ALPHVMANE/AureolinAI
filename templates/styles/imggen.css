@@ -1,0 +1,34 @@
+body {
+    font-family: 'Poppins', sans-serif; 
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    width: 100vw; 
+    /* -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;  */
+    overflow: auto;
+    background-image: url(../../public/images/imggen_bg.jpg); 
+}
+
+.imggen-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: rgba(6, 3, 37, 0.7);
+    padding: 15px;
+}
+
+.img-display{
+    border-radius: 15px;
+    margin: 10px 0px 10px 20px;
+}
+.default-img {
+    border-radius: 20px; 
+}
+.img-prompt{
+
+}
+

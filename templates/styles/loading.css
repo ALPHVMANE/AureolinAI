@@ -8,6 +8,7 @@
       <div class="loading-dot"></div>
   </figure>
   </div> 
+  use this function on submit button: showLoading(){document.getElementById('loading').style.display = 'flex';};
 */
 
 #loading {
