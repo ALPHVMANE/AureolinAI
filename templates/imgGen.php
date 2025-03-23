@@ -110,15 +110,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-        checkStatus();  // Ensure the checkStatus function runs after the page is loaded
-        });     
+        checkStatus('<?php echo $response_data['id']; ?>');
+        });
+
+        var IMGGEN_URL = "<?php echo IMGGEN_URL; ?>";   
+
         function showLoading() {
             document.getElementById('loading').style.display = 'flex';
         }
-        function checkStatus() {
-            fetch(`?cursors=${imageId}&limit=50&offset=0`)  // Add image_id as a query parameter
-        .then(response => response.json())  // Assuming the response is JSON
+        function checkStatus(imageId) {
+        fetch(`${IMGGEN_URL}?cursors=${imageId}&limit=50&offset=0`)  // Add image_id as a query parameter
+        .then(response => {
+            console.log('Fetch Response:', response);  // Log the response object
+            return response.json();
+        })
         .then(data => {
+            console.log('Response Data:', data);  // Log the parsed JSON data
             if (data.status === 'completed') {
                 console.log("Image is ready!");
                 location.reload();  // Reload the page when the image is ready
@@ -129,6 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
         })
         .catch(error => console.error("Error fetching status:", error));
 }
+
 
 // Assuming you have an imageId to check:
         checkStatus('<?php echo $response_data['id']; ?>');
