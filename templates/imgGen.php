@@ -3,6 +3,7 @@ require_once '../config/API/imggen.ai/config.php';
 
 
 $response = null; // Initialize response variable
+$errors = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
 
@@ -10,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
     echo "<script>console.log('Data input:', " . json_encode($data) . ");</script>";
 
     $data_array = [
-        "prompt" => $data,  // This is where the user's input goes
+        "prompt" => "$data",  // This is where the user's input goes
         "aspect_ratio" => "square",
         "highResolution" => false,
         "images" => 1,
@@ -24,15 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
 
     echo "<script>console.log('Check make_call response: ". json_encode($response)."');</script>'";
 
-    if (isset($response['detail']['errors'])) {
-        $errors = $response['response']['errors'];
-        $response = "<p style='color: red;'>" . implode(", ", $errors) . "</p>";
+    if (isset($response['detail']) && is_array($response['detail'])) {
+        // Convert error details into a string if it's an array
+        $errors = json_encode($response['detail'], JSON_PRETTY_PRINT);
+        echo "<script>console.error('imgGen.php Error:', " . json_encode($errors) . ");</script>";
     } else {
         if (isset($response['images'][0])) {
             $base64Image = $response['images'][0]; 
             $response = "<img src='data:image/png;base64," . htmlspecialchars($base64Image) . "' alt='Generated Image' />";
         } else {
-            $response = "<p>No image found in response.</p>";
+            $errors = "No image found in response.";
+            echo "<script>console.error('imgGen.php Error:', " . json_encode($errors) . ");</script>";
         }
     }
 }
@@ -68,6 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
         </div>
         <div class="img-display">
         <?= $response ? '<img class="img-display" src="' . $response . '" alt="Generated Image">' : '<img class="default-img img-display" src="../public/images/default_imggen.png" alt="Default Image">' ?>
+        <?php if (!empty($errors)): ?>
+                <p style="color:red; margin-top: 10px; font-weight: bold;"><?= htmlspecialchars($errors) ?></p>
+            <?php endif; ?>
         </div>
     </div>
 

@@ -25,7 +25,7 @@ function callAPI($method, $url, $data, $headers = []) {
             }
             break;
     }
-
+S
     // Set default headers
     $defaultHeaders = [
         "X-API-Key: " . IMGGEN_APIK,
@@ -57,7 +57,7 @@ function callAPI($method, $url, $data, $headers = []) {
     curl_close($curl);
 
     if ($err) {
-        echo "cURL Error #:" . $err;
+        // echo "cURL Error #:" . $err;
         echo "<script>console.log('cURL Error #: $err');</script>";
         echo "<script>console.log('Error POST array: $result_string');</script>";
         return false;
