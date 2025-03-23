@@ -1,10 +1,5 @@
-Hello If you are reading this, it means you cant sign up your account =)))
-So, please follow my steps:
-1) Turn on XAMPP Control Panel, make sure MySQL is running fine
-2) go localhost/phpmyadmin/
-3) create new Database, name it "aureolin_test" go to SQL tab
-4) paste this code in it. 
-
+CREATE DATABASE IF NOT EXISTS aureolin_test;
+USE aureolin_test;
 CREATE TABLE IF NOT EXISTS users (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
@@ -14,14 +9,10 @@ CREATE TABLE IF NOT EXISTS users (
     leaderboard_position INT(11) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE IF NOT EXISTS image_gallery (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id INT(11) UNSIGNED,
     image_url VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
-
-5) go to src/app/auth/auth.php
-6) change the servername, username, password, dbname
-7) do the same for src/app/features/faceid/capture_face.php line 31
-Done
