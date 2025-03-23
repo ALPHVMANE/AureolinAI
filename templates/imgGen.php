@@ -6,32 +6,46 @@ $imageSrc = '';
 $response = null;
 $errors = ''; 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['data'])) {
+    $data = trim(strtolower($_POST['data']));
 
-    $data = strtolower($_POST['data']);
-    
+    // Debugging input
+    echo "<script>console.log('Prompt: " . htmlspecialchars($data, ENT_QUOTES, 'UTF-8') . "');</script>";
+
     $data_array = [
-        "prompt"       => "$data", 
-        "aspect_ratio" => "square"
+        "prompt"       => $data, 
+        "samples"      => 1,
+        "aspect_ratio" => "square",
+        "model"        => "imggen-xl",
     ];
 
-    $make_call = callAPI('POST', IMGGEN_URL, json_encode($data_array));
-    
-    echo "<script>console.log('$make_call');</script>";
-    $response  = json_decode($make_call, true);
+    $json_data = json_encode($data_array);
 
-    if (isset($response['response']['errors'])) {
-        $error = $response['response']['errors'];
-        $errors = implode(", ", $error);
+    // Debugging JSON payload
+    echo "<script>console.log('JSON Payload: " . addslashes($json_data) . "');</script>";
+
+    $make_call = callAPI('POST', IMGGEN_URL, $json_data);
+
+    // Debugging API response
+    echo "<script>console.log('POST callAPI response: " . addslashes($make_call) . "');</script>";
+
+    $response = json_decode($make_call, true);
+
+    if (isset($response['message'])) {
+        // If 'message' is an array, join it; otherwise, just print the string
+        $errors = is_array($response['message']) ? implode(", ", $response['message']) : $response['message'];
+        echo "<script>console.log('Error: " . addslashes($errors) . "');</script>";
     } else {
         if (isset($response['images'][0])) {
             $base64Image = $response['images'][0]; 
             $imageSrc = "data:image/png;base64," . htmlspecialchars($base64Image);
         } else {
-            $response = "No image found in response.";
+            echo "<script>console.log('No image found in response.');</script>";
         }
     }
-    echo "<script>console.log('".json_encode($response)."');</script>";
+
+    // Debugging full response
+    echo "<script>console.log('Response: " . addslashes(json_encode($response)) . "');</script>";
 }
 ?>
 
