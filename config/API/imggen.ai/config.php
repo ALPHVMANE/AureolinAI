@@ -1,70 +1,51 @@
 <?php
-include 'C:/xampp2/htdocs/AureolinAI/env.php';
-function callAPI($method, $url, $data, $headers = []) {
+function callAPI($method, $url, $data, $headers = false) {
+    require_once './../env.php';
     $curl = curl_init();
-    echo "<script>console.log('callAPI argument: $data');</script>";
-
     switch (strtoupper($method)) {
         case "POST":
             curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST,"POST");
-            if (!empty($data)) {
+            if ($data) 
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-            }
             break;
-
-        case "PUT":
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-            if (!empty($data)) {
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-            }
-            break;
-
-        case "GET":
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST,"GET");
-        default:
-            if (!empty($data)) {
+        // case "PUT":
+        //     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+        //     if ($data)
+        //         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        //     break;
+        default: // for GET method
+            if ($data) 
                 $url = sprintf("%s?%s", $url, http_build_query($data));
-            }
-            break;
     }
+     // OPTIONS:
+   curl_setopt($curl, CURLOPT_URL, $url);
+   if(!$headers){
+       curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+          'X-IMGGEN-KEY: '.IMGGEN_APIK,
+          'Content-Type: application/json',
+       ));
+   }else{
+       curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+          'X-IMGGEN-KEY: '.IMGGEN_APIK,
+          'Content-Type: application/json',
+          $headers
+       ));
+   }
+   curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+   curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
-    // Set default headers
-    $defaultHeaders = [
-        "X-API-Key: " . IMGGEN_APIK,
-        "accept: application/json",
-        "content-type: application/json"
-    ];
-
-    // Merge custom headers if provided
-    if (!empty($headers) && is_array($headers)) {
-        $defaultHeaders = array_merge($defaultHeaders, $headers);
-    }
-
-    curl_setopt_array($curl, [
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_HTTPHEADER => $defaultHeaders,
-        CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-    ]);
-
-    // Execute cURL request
+    // EXECUTE
     $result = curl_exec($curl);
-    $err = curl_error($curl);
-    $result_string = json_encode($result);
+    $err = json_decode($result, true);
     
     curl_close($curl);
 
-    if ($err) {
-        echo "<script>console.log('cURL Error #: $err');</script>";
-        echo "<script>console.log('Error POST array: $result_string');</script>";
+    if ($err['success'] == false || $err['success'] == null) {
+        echo "<script>console.log('cURL Error #:" . $err['message'] . "');</script>";
+        echo "<script>console.log('Error POST array: $result');</script>";
         return false;
-    }elseif ($method == "POST") {
-        echo "<script>console.log('POST Success: $result_string');</script>";
+    }else {
+        echo "<script>console.log('POST Success: $result');</script>";
     }
 
     return $result;

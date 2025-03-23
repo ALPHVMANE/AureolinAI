@@ -1,41 +1,37 @@
-<?php  
+<?php
+require_once '../env.php';
 require_once '../config/API/imggen.ai/config.php';
-include '../src/features/imggen/img_get.php';
 
-$response = null; 
+$imageSrc = '';
+$response = null;
 $errors = ''; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
+
     $data = strtolower($_POST['data']);
+    
     $data_array = [
-        "prompt" => $data,
-        'model' => 'lyra',
-        "aspect_ratio" => "square",
-        "highResolution" => false,
-        "images" => 1,
-        "steps" => 20,
-        "initialImageMode" => "color"
+        "prompt"       => "$data", 
+        "aspect_ratio" => "square"
     ];
 
     $make_call = callAPI('POST', IMGGEN_URL, json_encode($data_array));
-    echo "<script>console.log('POST Response: " . $make_call . "');</script>";
-    $response_data = json_decode($make_call, true);
+    
+    echo "<script>console.log('$make_call');</script>";
+    $response  = json_decode($make_call, true);
 
-    if (isset($response_data['detail']) && is_array($response_data['detail'])) {
-        $errors = implode(", ", array_column($response_data['detail'], 'msg'));
-    } elseif (isset($response_data['images'])) {
-        echo "<script>document.body.style.background = blue;</script>";
-        set_time_limit(300);
-        echo "<script>console.log('getImageUrl ID: " . json_encode($response_data['id']) . "'); </script>";
-        $response = getImageUrl($response_data['id']);
-        echo "<script>console.log('IMAGE URL response: " . $response . "');document.getElementById('loading').style.display = 'none';</script>";
-        if ($response === null) {
-            $errors = "GET error: Image generation failed.";
-            echo "<script>document.getElementById('loading').style.display = 'none';</script>";
-        }
+    if (isset($response['response']['errors'])) {
+        $error = $response['response']['errors'];
+        $errors = implode(", ", $error);
     } else {
-        $errors = "No image found in response.";
+        if (isset($response['images'][0])) {
+            $base64Image = $response['images'][0]; 
+            $imageSrc = "data:image/png;base64," . htmlspecialchars($base64Image);
+        } else {
+            $response = "No image found in response.";
+        }
     }
+    echo "<script>console.log('".json_encode($response)."');</script>";
 }
 ?>
 
@@ -50,9 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
     <script>
         function showLoading() {
             document.getElementById('loading').style.display = 'flex';
-        }
-        function hideLoading() {
-            document.getElementById('loading').style.display = 'none';
         }
     </script>
 </head>
@@ -71,11 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
             </form>
         </div>
         <div class="img-display">
-            <?php if ($response || $response !== null): ?>
-                <img class="img-display" src="<?= $response ?>" alt="Generated Image">
-            <?php else: ?>
-                <img class="default-img img-display" src="../public/images/default_imggen.png" alt="Default Image">
-            <?php endif; ?>
+        <?php if (!empty($imageSrc)): ?>
+            <img class="img-display" src="<?= $imageSrc ?>" alt="Generated Image">
+            <script>document.getElementById('loading').style.display = 'none';</script>
+        <?php else: ?>
+            <img class="default-img img-display" src="./../public/images/defaultIMG.png" alt="Default Image">
+        <?php endif; ?>
 
             <!-- Display Errors Below the Image -->
             <?php if (!empty($errors)): ?>
