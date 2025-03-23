@@ -2,30 +2,33 @@
 include 'C:/xampp2/htdocs/AureolinAI/env.php';
 function callAPI($method, $url, $data, $headers = []) {
     $curl = curl_init();
+    echo "<script>console.log('callAPI argument: $data');</script>";
 
     switch (strtoupper($method)) {
         case "POST":
             curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST,"POST");
             if (!empty($data)) {
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
             }
             break;
 
         case "PUT":
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
             if (!empty($data)) {
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
             }
             break;
 
         case "GET":
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST,"GET");
         default:
             if (!empty($data)) {
                 $url = sprintf("%s?%s", $url, http_build_query($data));
             }
             break;
     }
-S
+
     // Set default headers
     $defaultHeaders = [
         "X-API-Key: " . IMGGEN_APIK,
@@ -57,15 +60,13 @@ S
     curl_close($curl);
 
     if ($err) {
-        // echo "cURL Error #:" . $err;
         echo "<script>console.log('cURL Error #: $err');</script>";
         echo "<script>console.log('Error POST array: $result_string');</script>";
         return false;
-    }else{
-        echo $result;
-        echo "<script>console.log('Error POST array: $result_string');</script>";
+    }elseif ($method == "POST") {
+        echo "<script>console.log('POST Success: $result_string');</script>";
     }
 
-    return json_decode($result, true);
+    return $result;
 }
 ?>
