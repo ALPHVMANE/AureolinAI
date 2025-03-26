@@ -12,12 +12,31 @@ body {
     background-image: url(../../public/images/imggen_bg.jpg); 
 }
 
+.img-prompt {
+    padding: 10px;
+    max-width: 100%;
+    line-height: 1.5;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    opacity: 0.8;
+    resize: none;
+    background-color: #6586cb;
+    color: #bacdee;
+}
+.img-prompt::placeholder {
+    color: #bacdee; 
+    opacity: 1; 
+}
+.img-prompt:focus {
+    border-color: #e2b547; 
+  }
 .imggen-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background: rgba(6, 3, 37, 0.7);
+    /* background: rgba(6, 3, 37, 0.7); */
     padding: 15px;
 }
 
@@ -27,8 +46,5 @@ body {
 }
 .default-img {
     border-radius: 20px; 
-}
-.img-prompt{
-
 }
 

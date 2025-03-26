@@ -4,7 +4,7 @@ include '../src/features/imggen/img_get.php';
 
 $response = null; 
 $errors = ''; 
-$find_id = null; 
+$find_id = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
     $data = strtolower($_POST['data']);
