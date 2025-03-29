@@ -27,15 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
     } elseif (isset($response_data['images'])) {
         set_time_limit(300);
         echo "<script>console.log('getImageUrl ID: " . json_encode($response_data['id']) . "'); </script>";
-        // $response = getImageUrl($response_data['id']);
-        // while (isset($response_data['status']) && $response_data['status'] === 'completed') {
-        //     $time = date('H:i:s');
-        //     echo "<script>console.log('$time | Status Info:". $response['status']. "| Waiting...');</script>";
-        //     // You might need to fetch the status again (re-request the status)
-        //     $get_data = callAPI('GET', $get_url, false);
-        //     $response_data = json_decode($get_data, true);
-        //     sleep(30);
-        // }
         $find_id = getImageUrl($response_data['id']);
 
 

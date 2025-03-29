@@ -1,6 +1,5 @@
 <?php
-function getImageUrl($id) {
-    
+function getImageUrl($id) { 
     require_once 'C:\xampp2\htdocs\AureolinAI\env.php';
     // Build the URL to query the specific image by ID
     $get_url = IMGGEN_URL.$id;
