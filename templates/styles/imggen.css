@@ -31,9 +31,14 @@ body {
 .img-prompt:focus {
     border-color: #e2b547; 
   }
-
-
+.imggen-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     /* background: rgba(6, 3, 37, 0.7); */
+    padding: 15px;
+}
 
 .img-display{
     border-radius: 15px;
@@ -42,4 +47,3 @@ body {
 .default-img {
     border-radius: 20px; 
 }
-
