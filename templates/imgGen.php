@@ -1,51 +1,43 @@
-<?php
-require_once '../env.php';
+<?php  
 require_once '../config/API/imggen.ai/config.php';
+include '../src/features/imggen/img_get.php';
 
-$imageSrc = '';
-$response = null;
+$response = null; 
 $errors = ''; 
+$find_id = null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['data'])) {
-    $data = trim(strtolower($_POST['data']));
-
-    // Debugging input
-    echo "<script>console.log('Prompt: " . htmlspecialchars($data, ENT_QUOTES, 'UTF-8') . "');</script>";
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
+    $data = strtolower($_POST['data']);
     $data_array = [
-        "prompt"       => $data, 
-        "samples"      => 1,
+        "prompt" => $data,
+        'model' => 'lyra',
         "aspect_ratio" => "square",
-        "model"        => "imggen-xl",
+        "highResolution" => false,
+        "images" => 1,
+        "steps" => 20,
+        "initialImageMode" => "color"
     ];
 
-    $json_data = json_encode($data_array);
+    $make_call = callAPI('POST', IMGGEN_URL, json_encode($data_array));
+    echo "<script>console.log('POST Response: " . $make_call . "');</script>";
+    $response_data = json_decode($make_call, true);
 
-    // Debugging JSON payload
-    echo "<script>console.log('JSON Payload: " . addslashes($json_data) . "');</script>";
+    if (isset($response_data['detail']) && is_array($response_data['detail'])) {
+        $errors = implode(", ", array_column($response_data['detail'], 'msg'));
+    } elseif (isset($response_data['images'])) {
+        set_time_limit(300);
+        echo "<script>console.log('getImageUrl ID: " . json_encode($response_data['id']) . "'); </script>";
+        $find_id = getImageUrl($response_data['id']);
 
-    $make_call = callAPI('POST', IMGGEN_URL, $json_data);
 
-    // Debugging API response
-    echo "<script>console.log('POST callAPI response: " . addslashes($make_call) . "');</script>";
+        echo "<script>console.log('IMAGE URL response: " . $find_id . "');</script>";
 
-    $response = json_decode($make_call, true);
-
-    if (isset($response['message'])) {
-        // If 'message' is an array, join it; otherwise, just print the string
-        $errors = is_array($response['message']) ? implode(", ", $response['message']) : $response['message'];
-        echo "<script>console.log('Error: " . addslashes($errors) . "');</script>";
-    } else {
-        if (isset($response['images'][0])) {
-            $base64Image = $response['images'][0]; 
-            $imageSrc = "data:image/png;base64," . htmlspecialchars($base64Image);
-        } else {
-            echo "<script>console.log('No image found in response.');</script>";
+        if ($find_id === null) {
+            $errors = "GET error: Image generation failed.";
         }
+    } else {
+        $errors = "No image found in response.";
     }
-
-    // Debugging full response
-    echo "<script>console.log('Response: " . addslashes(json_encode($response)) . "');</script>";
 }
 ?>
 
@@ -57,13 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['data'])) {
     <title>Image Generator</title>
     <link rel="stylesheet" href="../templates/styles/loading.css"/>
     <link rel="stylesheet" href="../templates/styles/imggen.css"/>
-    <script>
-        function showLoading() {
-            document.getElementById('loading').style.display = 'flex';
-        }
-    </script>
 </head>
 <body>
+    <div id="loading" class="loading">
+        <figure>
+            <div class="loading-dot loading-white"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+        </figure>
+    </div> 
     <div id="imggen-container" class="imggen-container">
         <div class="imggen-content">
             <h1>AI Image Generator</h1>
@@ -78,27 +74,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['data'])) {
             </form>
         </div>
         <div class="img-display">
-        <?php if (!empty($imageSrc)): ?>
-            <img class="img-display" src="<?= $imageSrc ?>" alt="Generated Image">
-            <script>document.getElementById('loading').style.display = 'none';</script>
-        <?php else: ?>
-            <img class="default-img img-display" src="./../public/images/defaultIMG.png" alt="Default Image">
-        <?php endif; ?>
+            <?php if ($find_id || $find_id !== null): ?>
+                <img class="img-display" src="<?= $find_id ?>" alt="Generated Image">
+                <script> document.getElementById('loading').style.display = 'none'; </script>
+            <?php else: ?>
+                <img class="default-img img-display" src="../public/images/default_imggen.png" alt="Default Image">
+            <?php endif; ?>
 
             <!-- Display Errors Below the Image -->
             <?php if (!empty($errors)): ?>
                 <p style="color:red; margin-top: 10px; font-weight: bold;"><?= htmlspecialchars($errors) ?></p>
+                <script> document.getElementById('loading').style.display = 'none'; </script>
             <?php endif; ?>
         </div>
     </div>
-    <div id="loading" class="loading">
-        <figure>
-            <div class="loading-dot loading-white"></div>
-            <div class="loading-dot"></div>
-            <div class="loading-dot"></div>
-            <div class="loading-dot"></div>
-            <div class="loading-dot"></div>
-        </figure>
-  </div> 
+    <script>
+        function showLoading() {
+            document.getElementById('loading').style.display = 'flex';
+        }
+        
+    </script>
 </body>
 </html>
