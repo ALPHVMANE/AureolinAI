@@ -94,5 +94,10 @@ function getImageUrl($id) {
     echo "<script>console.log('Maximum attempts reached. Image generation may have failed or timed out.');</script>\n";
     return false;
 }
+
+function ListImg() {
+    $url = getImageUrl($id);
+    return $url;
+}
 ?>
 
