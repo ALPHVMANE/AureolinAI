@@ -1,3 +1,32 @@
+
+<?php 
+require_once '../src/data/dbconfig.php';
+
+function imageList(){
+    global $connection;
+    $sqlStmt = "SELECT image_file FROM image_gallery";
+    $queryId = mysqli_query($connection, $sqlStmt);
+    
+    // Count the number of rows returned
+    $nbRows = mysqli_num_rows($queryId);
+    echo "Total number of rows: $nbRows <br/>";
+
+    // Loop through each image row and create HTML for each image
+    while ($row = mysqli_fetch_array($queryId)) {
+        // Get the image URL from the database
+        $imageUrl = $row['image_url'];
+
+        // Echo the HTML structure for each image inside a <div class="work">
+        echo '<div class="work">';
+        echo '<img src="' . $imageUrl . '" alt="Image">';
+        echo '</div>';
+    }
+
+    // Close the database connection
+    mysqli_close($connection);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -69,49 +98,18 @@
 				<div class="page-title">
 					Image Gallery
 				</div>
-
+<!-- 
 				<form class="searchbar">
 					<input type="search" name="" placeholder="Search...">
 					<a href="#" class="js-close-bar">
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 54 67.5" version="1.1" x="0px" y="0px"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#ffffff" fill-rule="nonzero"><path d="M0.738461538,53.2615385 C1.10769231,53.6307692 1.56923077,53.8153846 2.07692308,53.8153846 C2.58461538,53.8153846 3.04615385,53.6307692 3.41538462,53.2615385 L27,29.6769231 L50.5846154,53.2615385 C50.9538462,53.6307692 51.4153846,53.8153846 51.9230769,53.8153846 C52.3846154,53.8153846 52.8923077,53.6307692 53.2615385,53.2615385 C54,52.5230769 54,51.3230769 53.2615385,50.5846154 L29.6769231,27 L53.2615385,3.41538462 C54,2.67692308 54,1.47692308 53.2615385,0.738461538 C52.5230769,-8.60422844e-16 51.3230769,-8.60422844e-16 50.5846154,0.738461538 L27,24.3230769 L3.41538462,0.738461538 C2.67692308,-2.77555756e-17 1.47692308,-2.77555756e-17 0.738461538,0.738461538 C-2.77555756e-17,1.47692308 -2.77555756e-17,2.67692308 0.738461538,3.41538462 L24.3230769,27 L0.738461538,50.5846154 C-2.77555756e-17,51.3230769 -2.77555756e-17,52.5230769 0.738461538,53.2615385 Z"/></g></g></svg>
 					</a>
-				</form>
+				</form> -->
 
 			</header>
 
 			<section class="works smooth-in">
-				<?php 
-				
-				?>
-				
-				<div class="work">
-					<img src="../public/images/default_imggen.png">
-				</div>
-				<div class="work">
-					<img src="../public/images/default_imggen.png">
-				</div>
-				<div class="work">
-					<img src="../public/images/default_imggen.png">
-				</div>
-				<div class="work">
-					<img src="../public/images/default_imggen.png">
-				</div>
-				<div class="work">
-					<img src="../public/images/default_imggen.png">
-				</div>
-				<div class="work">
-					<img src="../public/images/default_imggen.png">
-				</div>
-				<div class="work">
-					<img src="../public/images/default_imggen.png">
-				</div>
-				<div class="work">
-					<img src="../public/images/default_imggen.png">
-				</div>
-				<div class="work">
-					<img src="../public/images/default_imggen.png">
-				</div>
-
+				<?php imageList(); ?>
 			</section>
 
 			<footer>

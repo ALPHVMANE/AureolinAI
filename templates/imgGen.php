@@ -69,6 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
                     <button type="submit">
                         <span>Generate</span>
                     </button>
+                    <button type="button" onclick="saveImage();">
+                        <span>Save</span>
+                    </button>
                     <div class="button-shadow"></div>
                 </div>
             </form>
@@ -78,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
                 <img class="img-display" src="<?= $find_id ?>" alt="Generated Image">
                 <script> document.getElementById('loading').style.display = 'none'; </script>
             <?php else: ?>
-                <img class="default-img img-display" src="../public/images/default_imggen.png" alt="Default Image">
+                <img class="default-img img-display" src="../public/images/defaultIMG.png" alt="Default Image">
             <?php endif; ?>
 
             <!-- Display Errors Below the Image -->
@@ -92,7 +95,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
         function showLoading() {
             document.getElementById('loading').style.display = 'flex';
         }
-        
+
+        function saveImage() {
+            const imageUrl = document.querySelector('.img-display').src;
+
+            if (!imageUrl || imageUrl.includes('defaultIMG.png')) {
+                alert("No image to save!");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("save", imageUrl);
+
+            fetch('../src/feature/imggen/save_img.php', {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    console.log(data.message);
+                    alert("Image saved successfully with ID: " + data.id);
+                } else {
+                    console.error(data.message);
+                    alert("Error saving image: " + data.message);
+                }
+            })
+            .catch(error => console.error("Fetch Error:", error));
+        }
     </script>
 </body>
 </html>
