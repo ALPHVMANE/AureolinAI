@@ -7,37 +7,38 @@ $errors = '';
 $find_id = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
-    $data = strtolower($_POST['data']);
-    $data_array = [
-        "prompt" => $data,
-        'model' => 'lyra',
-        "aspect_ratio" => "square",
-        "highResolution" => false,
-        "images" => 1,
-        "steps" => 20,
-        "initialImageMode" => "color"
-    ];
+    // $data = strtolower($_POST['data']);
+    // $data_array = [
+    //     "prompt" => $data,
+    //     'model' => 'lyra',
+    //     "aspect_ratio" => "square",
+    //     "highResolution" => false,
+    //     "images" => 1,
+    //     "steps" => 20,
+    //     "initialImageMode" => "color"
+    // ];
 
-    $make_call = callAPI('POST', IMGGEN_URL, json_encode($data_array));
-    echo "<script>console.log('POST Response: " . $make_call . "');</script>";
-    $response_data = json_decode($make_call, true);
+    // $make_call = callAPI('POST', IMGGEN_URL, json_encode($data_array));
+    // echo "<script>console.log('POST Response: " . $make_call . "');</script>";
+    // $response_data = json_decode($make_call, true);
 
-    if (isset($response_data['detail']) && is_array($response_data['detail'])) {
-        $errors = implode(", ", array_column($response_data['detail'], 'msg'));
-    } elseif (isset($response_data['images'])) {
-        set_time_limit(300);
-        echo "<script>console.log('getImageUrl ID: " . json_encode($response_data['id']) . "'); </script>";
-        $find_id = getImageUrl($response_data['id']);
+    // if (isset($response_data['detail']) && is_array($response_data['detail'])) {
+    //     $errors = implode(", ", array_column($response_data['detail'], 'msg'));
+    // } elseif (isset($response_data['images'])) {
+    //     set_time_limit(300);
+    //     echo "<script>console.log('getImageUrl ID: " . json_encode($response_data['id']) . "'); </script>";
+    //     $find_id = getImageUrl($response_data['id']);
+        
 
+    //     echo "<script>console.log('IMAGE URL response: " . $find_id . "');</script>";
 
-        echo "<script>console.log('IMAGE URL response: " . $find_id . "');</script>";
-
-        if ($find_id === null) {
-            $errors = "GET error: Image generation failed.";
-        }
-    } else {
-        $errors = "No image found in response.";
-    }
+    //     if ($find_id === null) {
+    //         $errors = "GET error: Image generation failed.";
+    //     }
+    // } else {
+    //     $errors = "No image found in response.";
+    // }
+    $find_id = 'https://tmp.starryai.com/api/120998/99cbbd23-1d11-4380-b8dd-ca7baca083ce.png';
 }
 ?>
 
@@ -69,17 +70,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
                     <button type="submit">
                         <span>Generate</span>
                     </button>
-                    <button type="button" onclick="saveImage();">
+                        <script>
+                            const imageUrl = "<?= $find_id ?>"; // Pass the PHP $find_id to JavaScript as imageUrl
+                            console.log('Generated Image URL:', imageUrl); // You can check if it's being passed correctly
+                        </script>
+                    <button type="button" name="save" id="saveBtn" onclick="saveImage(imageUrl);">
                         <span>Save</span>
                     </button>
-                    <div class="button-shadow"></div>
                 </div>
             </form>
         </div>
         <div class="img-display">
             <?php if ($find_id || $find_id !== null): ?>
                 <img class="img-display" src="<?= $find_id ?>" alt="Generated Image">
-                <script> document.getElementById('loading').style.display = 'none'; </script>
+                <script> 
+                    document.getElementById('loading').style.display = 'none'; 
+                </script>
+                
             <?php else: ?>
                 <img class="default-img img-display" src="../public/images/defaultIMG.png" alt="Default Image">
             <?php endif; ?>
@@ -96,18 +103,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
             document.getElementById('loading').style.display = 'flex';
         }
 
-        function saveImage() {
-            const imageUrl = document.querySelector('.img-display').src;
-
-            if (!imageUrl || imageUrl.includes('defaultIMG.png')) {
+        function saveImage(imgUrl) {
+            console.log(imgUrl);
+            if (!imgUrl || imgUrl.includes('defaultIMG.png')) {
                 alert("No image to save!");
                 return;
             }
 
             let formData = new FormData();
-            formData.append("save", imageUrl);
+            formData.append("save", imgUrl);
 
-            fetch('../src/feature/imggen/save_img.php', {
+            fetch('../src/features/imggen/saveImg.php', {
                 method: "POST",
                 body: formData
             })

@@ -2,23 +2,23 @@
 <?php 
 require_once '../src/data/dbconfig.php';
 
+$imageUrl = null;
 function imageList(){
     global $connection;
-    $sqlStmt = "SELECT image_file FROM image_gallery";
+    $sqlStmt = "SELECT image_url FROM image_gallery";
     $queryId = mysqli_query($connection, $sqlStmt);
     
     // Count the number of rows returned
     $nbRows = mysqli_num_rows($queryId);
-    echo "Total number of rows: $nbRows <br/>";
 
     // Loop through each image row and create HTML for each image
+	$count = 0;
     while ($row = mysqli_fetch_array($queryId)) {
         // Get the image URL from the database
-        $imageUrl = $row['image_url'];
+        $url = $row['image_url'];
 
-        // Echo the HTML structure for each image inside a <div class="work">
         echo '<div class="work">';
-        echo '<img src="' . $imageUrl . '" alt="Image">';
+		echo '<img src="'.$url.'"/>';
         echo '</div>';
     }
 
