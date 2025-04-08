@@ -1,3 +1,4 @@
 env.php
-src/features/imggen/img_get.php
 src/features/imggen/img_put.php
+
+/vendor/
