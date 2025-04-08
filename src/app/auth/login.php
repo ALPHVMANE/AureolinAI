@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../data/db.php');
+include('../../data/dbconfig.php');
 header("Content-Type: application/json");
 
 $data = json_decode(file_get_contents("php://input"), true);
@@ -13,7 +13,7 @@ if (!$username) {
 }
 
 $sql = "SELECT * FROM users WHERE username = ?";
-$stmt = mysqli_prepare($conn, $sql);
+$stmt = mysqli_prepare($connection, $sql);
 
 if (!$stmt) {
     echo json_encode(["success" => false, "error" => "Database query preparation failed"]);
@@ -46,5 +46,5 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 mysqli_stmt_close($stmt);
-mysqli_close($conn);
+mysqli_close($connection);
 ?>
