@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Quiz - Question 5</title>
-    <link rel="stylesheet" href="asc_style.css">
+    <link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_style.css">
+   <script src="/WEBAPPPROJECT/templates/js/asc_script.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,7 +68,7 @@
     <div class="quiz-container">
         <h2>5/5</h2>
         <div class="image-box">
-            <img src="./gameImages/Aureolin_Pyramid.jpeg" alt="Pyramid">
+            <img src="/WEBAPPPROJECT/public/images/Aureolin_Pyramid.jpeg" alt="Pyramid">
         </div>
         <div class="progress-bar">
             <div class="progress"></div>
@@ -84,7 +85,7 @@
 
     <script>
         function nextQuestion() {
-            window.location.href = "asc_index.php"; // Redirects to the next question
+            window.location.href = "asc_dashboard.php"; // Redirects to the next question
         }
         
         function correctAnswer(){

@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Learn a Language</title>
-<link rel="stylesheet" href="asc_gameStyles.css">
-<link rel="stylesheet" href="asc_style.css">
+<link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_style.css">
+<link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_gameStyles.css">
+   <script src="/WEBAPPPROJECT/templates/js/asc_script.js"></script>
 </head>
 <body>
  <?php include 'asc_navbar.php'; ?>

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Quiz - Question 1</title>
-    <link rel="stylesheet" href="asc_style.css"> 
+    <link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_style.css">
+   <script src="/WEBAPPPROJECT/templates/js/asc_script.js"></script> 
     
     <style>
         body {
@@ -67,7 +68,7 @@
     <div class="quiz-container">
         <h2>1/5</h2>
         <div class="image-box">
-            <img src="./gameImages/Aureolin_House.jpeg" alt="House">
+            <img src="/WEBAPPPROJECT/public/images/Aureolin_House.jpeg" alt="House">
         </div>
         <div class="progress-bar">
             <div class="progress" style="width: 20%;"></div> 
