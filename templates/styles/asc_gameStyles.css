@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #2E2E2E;
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    background: #7DB3F2;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+button {
+    background: #ffcc00;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ffaa00;
+}
+
