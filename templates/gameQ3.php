@@ -73,6 +73,8 @@
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
+        
+    <div class="feedback" id="feedback"></div> <!-- Feedback placeholder -->
         <div class="buttons">
             <button class="green" onclick="correctAnswer()">Horse</button>
             <button class="yellow" onclick="wrongAnswer()">Giraffe</button>
@@ -85,15 +87,17 @@
 
     <script>
         function nextQuestion() {
-            window.location.href = "gameQ4.php"; // Redirects to the next question
+            window.location.href = "gameQ4.php";
         }
-        
-        function correctAnswer(){
-        alert("Correct Answer ✅");
+
+        function correctAnswer() {
+            var feedback = document.getElementById('feedback');
+            feedback.innerHTML = '<span style="color: green; font-size: 24px;">✅ Correct!</span>';
         }
-        
-        function wrongAnswer(){
-        alert("Wrong Answer ❌");
+
+        function wrongAnswer() {
+            var feedback = document.getElementById('feedback');
+            feedback.innerHTML = '<span style="color: red; font-size: 24px;">❌ Incorrect!</span>';
         }
     </script>
  <?php include 'asc_footer.php'; ?>

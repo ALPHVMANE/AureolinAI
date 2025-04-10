@@ -64,7 +64,6 @@
 <?php include 'asc_navbar.php'; ?>
     
 
-    <!-- Quiz Content -->
     <div class="quiz-container">
         <h2>5/5</h2>
         <div class="image-box">
@@ -73,29 +72,34 @@
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
+        
+    <div class="feedback" id="feedback"></div> <!-- Feedback placeholder -->
         <div class="buttons">
             <button class="green" onclick="wrongAnswer()">Sphere</button>
             <button class="yellow" onclick="correctAnswer()">Pyramid</button>
             <button class="red" onclick="wrongAnswer()">Rectangle</button>
-            <button class="blue" onclick="wrongAnswer()">Trapazoid</button>
-            <br/>
-            <button class="white" onclick="nextQuestion()">Finish</button>
+            <button class="blue" onclick="wrongAnswer()">Cube</button>
+            <br>
+            <button class="white" onclick="nextQuestion()">Next</button>
         </div>
     </div>
 
     <script>
         function nextQuestion() {
-            window.location.href = "asc_dashboard.php"; // Redirects to the next question
+            window.location.href = "asc_dashboard.php";
         }
-        
-        function correctAnswer(){
-        alert("Correct Answer ✅");
+
+        function correctAnswer() {
+            var feedback = document.getElementById('feedback');
+            feedback.innerHTML = '<span style="color: green; font-size: 24px;">✅ Correct!</span>';
         }
-        
-        function wrongAnswer(){
-        alert("Wrong Answer ❌");
+
+        function wrongAnswer() {
+            var feedback = document.getElementById('feedback');
+            feedback.innerHTML = '<span style="color: red; font-size: 24px;">❌ Incorrect!</span>';
         }
     </script>
  <?php include 'asc_footer.php'; ?>
 </body>
 </html>
+

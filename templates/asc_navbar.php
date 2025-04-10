@@ -8,7 +8,7 @@
     
     <ul class="nav-links">
         <li><a href="/WEBAPPPROJECT/src/features/UX/asc_dashboard.php">Home</a></li>
-        <li><a href="/WEBAPPPROJECT/src/features/UX/imgGen.php">Image Generation</a></li>
+        <li><a href="/WEBAPPPROJECT/templates/imgGen.php">Image Generation</a></li>
         <li class="dropdown">
             <a href="#">Stats ▼</a>
             <ul class="dropdown-menu">
@@ -22,7 +22,7 @@
             </ul>
         </li>
         <li><a href="/WEBAPPPROJECT/templates/faceLogin.html">Login</a></li>
-        <li><a href="/WEBAPPPROJECT/public/auth/logout.php">Sign Out</a></li>
+        <li><a href="/WEBAPPPROJECT/public/index.php">Sign Out</a></li>
     </ul>
     
     <div class="hamburger">
