@@ -95,7 +95,7 @@ $fact = $facts[date('z') % count($facts)];
         .xp-progress {
             height: 100%;
             background-color: #fbc02d;
-            width: <?php echo min(100, ($xp % 100)); ?>%;
+            width: <?php echo min(100, ($xp % 100)); ?>%
         }
 
         .quiz button {
