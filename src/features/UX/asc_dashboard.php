@@ -53,7 +53,6 @@ $fact = $facts[date('z') % count($facts)];
 
     <link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_style.css">
     <script src="/WEBAPPPROJECT/templates/js/asc_script.js"></script>
-
     <style>
         body {
             background-color: #2b2e35;

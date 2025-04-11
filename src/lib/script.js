@@ -73,7 +73,7 @@ async function loginUser(username) {
       let data = await response.json();
       if (data.success) {
           //alert("Login successful! Redirecting...");
-          window.location.href = "../src/app/dashboard/dashboard.php";
+          window.location.href = "../src/features/UX/asc_dashboard.php";
       } else {
           alert("Login failed: " + data.error);
       }

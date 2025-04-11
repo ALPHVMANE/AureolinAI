@@ -37,7 +37,7 @@ if (mysqli_num_rows($result) > 0) {
     // Regular Password Login
     if (password_verify($password, $user['password'])) {
         $_SESSION['username'] = $user['username'];
-        echo json_encode(["success" => true, "redirect" => "../dashboard/dashboard.php"]);
+        echo json_encode(["success" => true, "redirect" => "../../../src/features/UX/asc_dashboard.php"]);
     } else {
         echo json_encode(["success" => false, "error" => "Invalid password"]);
     }
