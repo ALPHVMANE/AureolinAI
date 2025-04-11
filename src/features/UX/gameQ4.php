@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Quiz - Question 4</title>
-    <link rel="stylesheet" href="asc_style.css">
+    <link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_style.css">
+   <script src="/WEBAPPPROJECT/templates/js/asc_script.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,20 +64,20 @@
 <?php include 'asc_navbar.php'; ?>
     
 
-    <!-- Quiz Content -->
+        <!-- Quiz Content -->
     <div class="quiz-container">
         <h2>4/5</h2>
         <div class="image-box">
-            <img src="./gameImages/Aureolin_Plane.jpeg" alt="Plane">
+            <img src="/WEBAPPPROJECT/public/images/Aureolin_Plane.jpeg" alt="Plane">
         </div>
-        <div class="progress-bar">
-            <div class="progress"></div>
-        </div>
+        
+        
+    <div class="feedback" id="feedback"></div> <!-- Feedback placeholder -->
         <div class="buttons">
-            <button class="green" onclick="wrongAnswer()">Submarine</button>
-            <button class="yellow" onclick="wrongAnswer()">Car</button>
-            <button class="red" onclick="wrongAnswer()">Boat</button>
-            <button class="blue" onclick="correctAnswer()">Plane</button>
+            <button class="green" onclick="wrongAnswer()">Sous-Marin</button>
+            <button class="yellow" onclick="wrongAnswer()">Voiture</button>
+            <button class="red" onclick="wrongAnswer()">Bateau</button>
+            <button class="blue" onclick="correctAnswer()">Avion</button>
             <br>
             <button class="white" onclick="nextQuestion()">Next</button>
         </div>
@@ -84,15 +85,17 @@
 
     <script>
         function nextQuestion() {
-            window.location.href = "gameQ5.php"; // Redirects to the next question
+            window.location.href = "gameQ5.php";
         }
-        
-        function correctAnswer(){
-        alert("Correct Answer ✅");
+
+        function correctAnswer() {
+            var feedback = document.getElementById('feedback');
+            feedback.innerHTML = '<span style="color: green; font-size: 24px;">✅ Correct!</span>';
         }
-        
-        function wrongAnswer(){
-        alert("Wrong Answer ❌");
+
+        function wrongAnswer() {
+            var feedback = document.getElementById('feedback');
+            feedback.innerHTML = '<span style="color: red; font-size: 24px;">❌ Incorrect!</span>';
         }
     </script>
  <?php include 'asc_footer.php'; ?>

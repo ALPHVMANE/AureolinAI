@@ -1,158 +1,212 @@
+<?php
+session_start();
+$username = $_SESSION['username'] ?? 'Guest';
+$xp = 420;
+
+// Word of the Day
+$words = [
+    ['word' => 'Maison', 'translation' => 'House'],
+    ['word' => 'Chien', 'translation' => 'Dog'],
+    ['word' => 'Bonjour', 'translation' => 'Hello'],
+    ['word' => 'Merci', 'translation' => 'Thank you'],
+    ['word' => 'École', 'translation' => 'School']
+];
+$dayIndex = date('z') % count($words);
+$wordOfTheDay = $words[$dayIndex];
+
+// Daily Challenge
+$challenges = [
+    "Translate 5 new words today.",
+    "Practice for 10 minutes.",
+    "Try saying today’s word out loud!",
+    "Explain a word to someone IRL.",
+    "Review your last lesson."
+];
+$challenge = $challenges[date('z') % count($challenges)];
+
+// Language Tips
+$tips = [
+    "In French, all nouns have a gender.",
+    "French is spoken on 5 continents.",
+    "Accents matter in French spelling.",
+    "Most French verbs follow regular patterns.",
+    "Learning French boosts your memory!"
+];
+$tip = $tips[date('z') % count($tips)];
+
+// Fun Language Fact
+$facts = [
+    "“Pain” means bread in French — not suffering 😅",
+    "The French word for 'gift' is 'cadeau'.",
+    "‘Baguette’ also means ‘wand’ in French!",
+    "In French, 'chat' means cat 🐱.",
+    "‘Vin’ is wine 🍷, not vinegar!"
+];
+$fact = $facts[date('z') % count($facts)];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aureolin - Home</title>
-    <link rel="stylesheet" href="templates/css/asc_style.css">
-    
+
+    <link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_style.css">
+    <script src="/WEBAPPPROJECT/templates/js/asc_script.js"></script>
+
     <style>
         body {
-            display: center; 
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             background-color: #2b2e35;
-        }
-        .form-container {
-            width: 300px;
-            height: 300px;
-            background-color: #7DB3F2;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        input, button {
-            margin: 10px;
-            padding: 10px;
-            width: 80%;
-        }
-        button {
-            background-color: #ffcc00;
-            color: black;
-            border: none;
-            cursor: pointer;
-        }
-        .center-div {
-            display: flex;
-            justify-content: center; /* Centers horizontally */
-            align-items: center; /* Centers vertically */
-            height: 100vh; /* Takes full viewport height */
-        }
-        
-        .search-container {
-            text-align: center;
-            margin: 20px auto;
-        }
-
-        .search-container label {
-            font-size: 22px;
-            font-weight: bold;
-            color: #AFC1D6;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .search-container input {
-            width: 300px;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        /* Leaderboard */
-        .leaderboard {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .leaderboard h2 {
-            font-size: 24px;
-            color: #AFC1D6;
-        }
-
-        .top-3 {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .player {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #444;
-            padding: 15px;
-            border-radius: 10px;
-            width: 120px;
-        }
-
-        .player img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .player p {
-            font-size: 22px;
-            font-weight: bold;
-            margin: 5px 0;
-        }
-
-        .player h3 {
-            font-size: 16px;
-            margin: 5px 0;
             color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .player span {
-            font-size: 18px;
+        .dashboard-widgets {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin: 60px auto;
+            max-width: 1100px;
+            padding: 0 20px;
+        }
+
+        .widget {
+            background-color: #444;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            min-width: 280px;
+            flex: 1;
+        }
+
+        .xp-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .xp-progress {
+            height: 100%;
+            background-color: #fbc02d;
+            width: <?php echo min(100, ($xp % 100)); ?>%;
+        }
+
+        .quiz button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            border: none;
+        }
+
+        .correct { background-color: #4CAF50; }
+        .wrong { background-color: #f44336; }
+
+        .streak {
+            font-size: 20px;
             font-weight: bold;
             color: #FFD700;
+            text-align: center;
         }
-        
     </style>
-    
 </head>
 <body>
-    <?php include 'asc_navbar.php'; ?>  <!-- Include the reusable nav bar -->
-    
-    <div class="search-container">
-        <label for="search">Learn a language</label>
-        <input type="text" id="search" placeholder="Search">
+
+<?php include 'asc_navbar.php'; ?>
+
+<div class="dashboard-widgets">
+    <!-- Welcome + XP -->
+    <div class="widget">
+        <h2>Welcome back, <?php echo htmlspecialchars($username); ?> 👋</h2>
+        <p>You’ve earned <strong><?php echo $xp; ?> XP</strong> so far.</p>
+        <div class="xp-bar"><div class="xp-progress"></div></div>
+        <p>Level <?php echo floor($xp / 100) + 1; ?></p>
+        <div class="streak" id="streakDisplay">🔥 Loading streak...</div>
     </div>
 
-    <!-- Leaderboard -->
-    <div class="leaderboard">
-        <h2>LEADERBOARD</h2>
-        <div class="top-3">
-            <div class="player second">
-                <img src="./users/xenon.png" alt="Xenon Fitch">
-                <p>2</p>
-                <h3>Xenon Fitch</h3>
-                <span>12.6</span>
-            </div>
-            <div class="player first">
-                <img src="./users/eiden.png" alt="Eiden Blues">
-                <p>1</p>
-                <h3>Eiden Blues</h3>
-                <span>18.7</span>
-            </div>
-            <div class="player third">
-                <img src="./users/gemma.png" alt="Gemma Vu">
-                <p>3</p>
-                <h3>Gemma Vu</h3>
-                <span>16.7</span>
-            </div>
-        </div>
+    <!-- Word of the Day -->
+    <div class="widget">
+        <h3>📖 Word of the Day</h3>
+        <p><strong><?php echo $wordOfTheDay['word']; ?></strong> — "<?php echo $wordOfTheDay['translation']; ?>"</p>
     </div>
- <?php include 'asc_footer.php'; ?> 
+
+    <!-- Daily Challenge -->
+    <div class="widget">
+        <h3>🏆 Daily Challenge</h3>
+        <p><?php echo $challenge; ?></p>
+    </div>
+
+    <!-- Did You Know -->
+    <div class="widget">
+        <h3>💡 Did You Know?</h3>
+        <p><?php echo $tip; ?></p>
+    </div>
+
+    <!-- Fun Fact -->
+    <div class="widget">
+        <h3>🎉 Fun French Fact</h3>
+        <p><?php echo $fact; ?></p>
+    </div>
+
+    <!-- Mini Quiz -->
+    <div class="widget quiz">
+        <h3>🧠 Quick Quiz</h3>
+        <p>What does <strong>"Bonjour"</strong> mean?</p>
+        <button onclick="checkAnswer(this, false)">Goodbye</button>
+        <button onclick="checkAnswer(this, true)">Hello</button>
+        <button onclick="checkAnswer(this, false)">Please</button>
+        <button onclick="checkAnswer(this, false)">Bread</button>
+    </div>
+</div>
+
+<?php include 'asc_footer.php'; ?>
+
+<script>
+// 🔥 Streak Tracker
+(function streakTracker() {
+    const today = new Date().toDateString();
+    let last = localStorage.getItem('lastLogin');
+    let streak = parseInt(localStorage.getItem('streak')) || 0;
+
+    if (last !== today) {
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+
+        if (last === yesterday.toDateString()) {
+            streak++;
+        } else {
+            streak = 1;
+        }
+
+        localStorage.setItem('streak', streak);
+        localStorage.setItem('lastLogin', today);
+    }
+
+    document.getElementById("streakDisplay").innerText = `🔥 ${streak}-day learning streak`;
+})();
+
+// ✅ Mini Quiz Handler
+function checkAnswer(btn, correct) {
+    const buttons = btn.parentElement.querySelectorAll("button");
+    buttons.forEach(b => {
+        b.disabled = true;
+        b.style.opacity = 0.6;
+    });
+
+    btn.classList.add(correct ? "correct" : "wrong");
+    btn.innerText += correct ? " ✅" : " ❌";
+}
+</script>
+
 </body>
 </html>

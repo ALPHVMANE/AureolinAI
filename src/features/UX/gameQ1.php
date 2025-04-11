@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Quiz - Question 1</title>
-    <link rel="stylesheet" href="asc_style.css"> 
-    
+    <link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_style.css">
+    <script src="/WEBAPPPROJECT/templates/js/asc_script.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -57,29 +58,32 @@
         .red { background-color: #a0522d; }
         .blue { background-color: #0288d1; }
         .white { background-color: white; }
+
+        .feedback {
+            margin-top: 20px;
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
 
-    <?php include 'asc_navbar.php'; ?>  
+    <?php include 'asc_navbar.php'; ?>
 
     <!-- Quiz Content -->
     <div class="quiz-container">
         <h2>1/5</h2>
         <div class="image-box">
-            <img src="./gameImages/Aureolin_House.jpeg" alt="House">
+            <img src="/WEBAPPPROJECT/public/images/Aureolin_House.jpeg" alt="House">
         </div>
-        <div class="progress-bar">
-            <div class="progress" style="width: 20%;"></div> 
-        </div>
+        
+        <div class="feedback" id="feedback"></div> <!-- Feedback placeholder -->
         <div class="buttons">
-            <button class="green" onclick="wrongAnswer()">Cabin</button>
-            <button class="yellow" onclick="correctAnswer()">House</button>
-            <button class="red" onclick="wrongAnswer()">Hotel</button>
-            <button class="blue" onclick="wrongAnswer()">Apartment</button>
+            <button class="green" onclick="wrongAnswer()">Cabane</button>
+            <button class="yellow" onclick="correctAnswer()">Masion</button>
+            <button class="red" onclick="wrongAnswer()">Hôtel</button>
+            <button class="blue" onclick="wrongAnswer()">Appartement</button>
             <br>
             <button class="white" onclick="nextQuestion()">Next</button>
-           
         </div>
     </div>
 
@@ -87,16 +91,18 @@
         function nextQuestion() {
             window.location.href = "gameQ2.php";
         }
-        
-        function correctAnswer(){
-        alert("Correct Answer ✅");
+
+        function correctAnswer() {
+            var feedback = document.getElementById('feedback');
+            feedback.innerHTML = '<span style="color: green; font-size: 24px;">✅ Correct!</span>';
         }
-        
-        function wrongAnswer(){
-        alert("Wrong Answer ❌");
+
+        function wrongAnswer() {
+            var feedback = document.getElementById('feedback');
+            feedback.innerHTML = '<span style="color: red; font-size: 24px;">❌ Incorrect!</span>';
         }
     </script>
-    
+
     <?php include 'asc_footer.php'; ?>
 </body>
 </html>

@@ -1,15 +1,3 @@
-<footer class="footer">
-    <div class="footer-container">
-        <p>&copy; <?php echo date("Y"); ?> Aureolin Learning. All rights reserved.</p>
-        <ul class="footer-links">
-            <li><a href="asc_index.php">Home</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="asc_contact.php">Contact Us</a></li>
-        </ul>
-    </div>
-</footer>
-
 <style>
     html, body {
     height: 100%;
@@ -61,3 +49,15 @@
     color: #FFD700;
 }
 </style>
+
+<footer class="footer">
+    <div class="footer-container">
+        <p>&copy; <?php echo date("Y"); ?> Aureolin Learning. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="asc_dashboard.php">Home</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a >Contact Us</a></li>
+        </ul>
+    </div>
+</footer>
