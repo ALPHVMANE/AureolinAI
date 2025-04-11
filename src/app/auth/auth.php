@@ -1,12 +1,8 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "Tim";
-$password = "admin";
-$dbname = "aureolin_test";
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+include('../../data/dbconfig.php');
 
-if (!$conn) {
+if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
@@ -16,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
 
     if ($action === "login") {
-        $stmt = mysqli_prepare($conn, "SELECT id, password FROM users WHERE username = ?");
+        $stmt = mysqli_prepare($connection, "SELECT id, password FROM users WHERE username = ?");
         mysqli_stmt_bind_param($stmt, "s", $username);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
@@ -28,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $hashed_password)) {
                 $_SESSION['user_id'] = $id;
                 $_SESSION['username'] = $username;
-                header("Location: ../dashboard/dashboard.php");
+                header("Location: ../../../src/features/UX/asc_dashboard.php");
                 exit();
             } else {
                 header("Location: ../../../public/index.php?error=Invalid password!");
@@ -41,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } 
     
     elseif ($action === "signup") {
-        $stmt = mysqli_prepare($conn, "SELECT id FROM users WHERE username = ?");
+        $stmt = mysqli_prepare($connection, "SELECT id FROM users WHERE username = ?");
         mysqli_stmt_bind_param($stmt, "s", $username);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
@@ -51,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-            $stmt = mysqli_prepare($conn, "INSERT INTO users (username, password) VALUES (?, ?)");
+            $stmt = mysqli_prepare($connection, "INSERT INTO users (username, password) VALUES (?, ?)");
             mysqli_stmt_bind_param($stmt, "ss", $username, $hashed_password);
 
             if (mysqli_stmt_execute($stmt)) {
@@ -63,5 +59,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-mysqli_close($conn);
+mysqli_close($connection);
 ?>
