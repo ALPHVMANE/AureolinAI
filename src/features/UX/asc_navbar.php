@@ -7,22 +7,23 @@
     </div>
     
     <ul class="nav-links">
-        <li><a href="/WEBAPPPROJECT/src/features/UX/asc_dashboard.php">Home</a></li>
-        <li><a href="/WEBAPPPROJECT/templates/imgGen.php">Image Generation</a></li>
+        <li><a href="../../features/UX/asc_dashboard.php">Home</a></li>
+        <li><a href="../../../templates/imgGen.php">Image Generation</a></li>
         <li class="dropdown">
             <a href="#">Stats ▼</a>
             <ul class="dropdown-menu">
-                <li><a href="/WEBAPPPROJECT/src/features/UX/asc_leaderboards.php">Leaderboards</a></li>
+                <li><a href="../../../features/UX/asc_leaderboards.php">Leaderboards</a></li>
             </ul>
         </li>
         <li class="dropdown">
             <a href="#">Learning ▼</a>
             <ul class="dropdown-menu">
-                <li><a href="/WEBAPPPROJECT/src/features/UX/asc_gamestart.php">NewGame</a></li>
+                <li><a href="../../features/UX/asc_gamestart.php">NewGame</a></li>
             </ul>
         </li>
-        <li><a href="/WEBAPPPROJECT/templates/faceLogin.html">Login</a></li>
-        <li><a href="/WEBAPPPROJECT/public/index.php">Sign Out</a></li>
+        <li><a href="../../../src/features/faceid/setupfaceid.php">Set Up Face ID</a></li>
+        <li><a href="../../../templates/faceLogin.html">Login</a></li>
+        <li><a href="../../../public/index.php">Sign Out</a></li>
     </ul>
     
     <div class="hamburger">

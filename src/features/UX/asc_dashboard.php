@@ -51,8 +51,8 @@ $fact = $facts[date('z') % count($facts)];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aureolin - Home</title>
 
-    <link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_style.css">
-    <script src="/WEBAPPPROJECT/templates/js/asc_script.js"></script>
+    <link rel="stylesheet" href="../../../templates/styles/asc_style.css">
+    <script src="../../../templates/js/UX/asc_script.js"></script>
     
     <style>
         body {

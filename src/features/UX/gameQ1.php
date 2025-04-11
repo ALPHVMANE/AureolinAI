@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Quiz - Question 1</title>
-    <link rel="stylesheet" href="/WEBAPPPROJECT/templates/styles/asc_style.css">
-    <script src="/WEBAPPPROJECT/templates/js/asc_script.js"></script>
+    <link rel="stylesheet" href="../../../templates/styles/asc_style.css">
+    <script src="../../../templates/js/UX/asc_script.js"></script>
 
     <style>
         body {
@@ -73,7 +73,7 @@
     <div class="quiz-container">
         <h2>1/5</h2>
         <div class="image-box">
-            <img src="/WEBAPPPROJECT/public/images/Aureolin_House.jpeg" alt="House">
+            <img src="../../../public/images/Aureolin_House.jpeg" alt="House">
         </div>
         
         <div class="feedback" id="feedback"></div> <!-- Feedback placeholder -->
