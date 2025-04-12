@@ -1,0 +1,105 @@
+.navbar .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #7DB3F2; /* Navbar background */
+    position: relative;
+    z-index: 10;
+}
+
+/* Logo Container */
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Controls space between logo and text */
+}
+
+/* Logo Image */
+.navbar .logo img {
+    height: 40px;
+    width: auto;
+    max-width: 100px;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Navbar Links */
+.navbar .nav-links {
+    display: flex;
+    list-style: none;
+    margin-left: auto; /* Push links to the right */
+}
+
+.navbar .nav-links li {
+    margin-left: 15px; /* Space between links */
+}
+
+.navbar .nav-links > li > a:hover {
+    border: 2px solid yellow;
+    border-radius: 5px;
+    background-color: #7DB3F2;
+}
+
+/* Navbar Links Text Styling */
+.navbar .nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+}
+
+/* Navbar Link Hover Effect */
+nav a {
+    text-decoration: none; /* Remove default underline */
+    color: white;
+    padding: 10px 15px; /* Padding for links */
+    transition: all 0.navbar .3s ease-in-out;
+}
+
+nav a:hover {
+    border: 2px solid yellow; /* Hover effect border */
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.navbar .2);
+}
+
+/* Dropdown Menu */
+.navbar .dropdown {
+    position: relative;
+}
+
+.navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #7DB3F2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.navbar .1);
+    list-style: none;
+    padding: 10px;
+}
+
+.navbar .dropdown-menu li {
+    margin: 5px 0;
+}
+
+.navbar .dropdown-menu a {
+    color: black;
+}
+
+.navbar .dropdown:hover .navbar .dropdown-menu {
+    display: block;
+}
+
+/* Hamburger Menu for Mobile */
+.navbar .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.navbar .hamburger span {
+    background-color: black;
+    height: 3px;
+    width: 25px;
+    margin: 4px 0;
+}
