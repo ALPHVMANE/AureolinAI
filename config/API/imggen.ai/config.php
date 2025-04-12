@@ -1,5 +1,5 @@
 <?php
-include 'C:/xampp2/htdocs/AureolinAI/env.php';
+include $_SERVER['DOCUMENT_ROOT'].'/AureolinAI/env.php';
 function callAPI($method, $url, $data, $headers = []) {
     $curl = curl_init();
     echo "<script>console.log('callAPI argument: $data');</script>";
