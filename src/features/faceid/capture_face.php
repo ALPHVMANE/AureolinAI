@@ -43,9 +43,9 @@ if (isset($data['image'])) {
     mysqli_stmt_execute($stmt);
 
     if (mysqli_stmt_affected_rows($stmt) > 0) {
-        echo "Face ID successfully set up!";
+        echo " Face ID successfully set up! ";
     } else {
-        echo "Failed to update face ID.";
+        echo " Updated face ID. ";
     }
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
