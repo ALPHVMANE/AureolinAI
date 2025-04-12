@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Generator</title>
+    <link rel="stylesheet" href="../templates/styles/asc_navbar.css"/>
     <link rel="stylesheet" href="../templates/styles/loading.css"/>
     <link rel="stylesheet" href="../templates/styles/imggen.css"/>
 </head>
@@ -60,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
             <div class="loading-dot"></div>
         </figure>
     </div> 
+    <?php include '../src/features/UX/asc_navbar.php'; ?>
     <div id="imggen-container" class="imggen-container">
         <div class="imggen-content">
             <h1>AI Image Generator</h1>
