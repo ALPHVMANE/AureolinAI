@@ -66,14 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
             <form method="POST" action="" onsubmit="showLoading();">
                 <textarea placeholder="Enter Text Prompt Here...." class="img-prompt" name="data" rows="11" cols="60" required></textarea>
                 <div class="button-wrap">
-                    <button type="submit">
-                        <span>Generate</span>
-                    </button>
+                    <button type="submit" class="btn-hover color">Generate</button>
                         <script>
                             const imageUrl = "<?= $find_id ?>"; // Pass the PHP $find_id to JavaScript as imageUrl
                             console.log('Generated Image URL:', imageUrl); // You can check if it's being passed correctly
                         </script>
-                    <button type="button" name="save" id="saveBtn" onclick="saveImage(imageUrl);">
+                    <button type="button" class="btn-hover color" name="save" id="saveBtn" onclick="saveImage(imageUrl);">
                         <span>Save</span>
                     </button>
                 </div>
