@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Generator</title>
+    <link rel="stylesheet" href="../templates/styles/asc_navbar.css"/>
     <link rel="stylesheet" href="../templates/styles/loading.css"/>
     <link rel="stylesheet" href="../templates/styles/imggen.css"/>
 </head>
@@ -60,20 +61,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
             <div class="loading-dot"></div>
         </figure>
     </div> 
+    <?php include '../src/features/UX/asc_navbar.php'; ?>
     <div id="imggen-container" class="imggen-container">
         <div class="imggen-content">
             <h1>AI Image Generator</h1>
             <form method="POST" action="" onsubmit="showLoading();">
                 <textarea placeholder="Enter Text Prompt Here...." class="img-prompt" name="data" rows="11" cols="60" required></textarea>
                 <div class="button-wrap">
-                    <button type="submit">
-                        <span>Generate</span>
-                    </button>
+                    <button type="submit" class="btn-hover color">Generate</button>
                         <script>
                             const imageUrl = "<?= $find_id ?>"; // Pass the PHP $find_id to JavaScript as imageUrl
                             console.log('Generated Image URL:', imageUrl); // You can check if it's being passed correctly
                         </script>
-                    <button type="button" name="save" id="saveBtn" onclick="saveImage(imageUrl);">
+                    <button type="button" class="btn-hover color" name="save" id="saveBtn" onclick="saveImage(imageUrl);">
                         <span>Save</span>
                     </button>
                 </div>

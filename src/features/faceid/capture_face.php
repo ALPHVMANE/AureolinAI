@@ -27,18 +27,12 @@ if (isset($data['image'])) {
     } else {
         echo "New image saved.";
     }    
-
-    $servername = "localhost";
-    $dbUsername = "Tim";
-    $dbPassword = "admin";
-    $dbname = "aureolin_test";
-
-    $conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbname);
-    if (!$conn) {
+    require_once '../../data/dbconfig.php';
+    if (!$connection) {
         echo "Connection failed: " . mysqli_connect_error();
         exit();
     }
-    $stmt = mysqli_prepare($conn, "UPDATE users SET face_image = ? WHERE username = ?");
+    $stmt = mysqli_prepare($connection, "UPDATE users SET face_image = ? WHERE username = ?");
     mysqli_stmt_bind_param($stmt, "ss", $imagePath, $username);
     mysqli_stmt_execute($stmt);
 
@@ -48,7 +42,7 @@ if (isset($data['image'])) {
         echo " Updated face ID. ";
     }
     mysqli_stmt_close($stmt);
-    mysqli_close($conn);
+    mysqli_close($connection);
 } else {
     echo "No image received!</br>";
 }
