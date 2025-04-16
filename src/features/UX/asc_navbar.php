@@ -25,7 +25,7 @@
             <li class="dropdown">
                 <a href="#">Learning ▼</a>
                 <ul class="dropdown-menu">
-                    <li><a href="../../features/UX/asc_gamestart.php">New Game</a></li>
+                    <li><a href="./asc_gamestart.php">New Game</a></li>
                 </ul>
             </li>
             <li><a href="../../../src/features/faceid/setupfaceid.php">Set Up Face ID</a></li>

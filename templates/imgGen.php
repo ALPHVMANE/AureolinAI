@@ -70,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
             <div class="loading-dot"></div>
         </figure>
     </div> 
-    <?php include '../src/features/UX/asc_navbar.php'; ?>
     <div id="imggen-container" class="imggen-container">
         <div class="imggen-content">
             <h1>AI Image Generator</h1>
