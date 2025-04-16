@@ -77,15 +77,16 @@ if (!isset($_SESSION['username'])) {
             background-color: #C5D1DF;
 
             border-radius: 50px;
-            moz-transition: all .4s ease-in-out;
+            -moz-transition: all .4s ease-in-out;
             -o-transition: all .4s ease-in-out;
             -webkit-transition: all .4s ease-in-out;
+            background-position: 0 0;
             transition: all .4s ease-in-out;
         }
 
         .btn-hover:hover {
             background-position: 100% 0;
-            moz-transition: all .4s ease-in-out;
+            -moz-transition: all .4s ease-in-out;
             -o-transition: all .4s ease-in-out;
             -webkit-transition: all .4s ease-in-out;
             transition: all .4s ease-in-out;
@@ -134,7 +135,8 @@ if (!isset($_SESSION['username'])) {
         <video id="video" autoplay></video>
         <canvas id="canvas" style="display: none;"></canvas>
         <img id="preview" style="display:none;" />
-        <button class="btn-hover" onclick="captureImage()">Capture Face</button>
+        <button class="btn-hover color" onclick="captureImage()">Capture Face</button>
+
 
         <p id="status"></p>
     </div>
