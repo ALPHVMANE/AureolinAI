@@ -19,12 +19,14 @@ if (!isset($_SESSION['username'])) {
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: rgb(253, 255, 150);
+            background-color: #f5ec89;
+            background-image: url(http://www.transparenttextures.com/patterns/brushed-alum-dark.png);
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
+            color: #84572f;
             animation: fadeIn 1s ease;
         }
 
@@ -41,18 +43,13 @@ if (!isset($_SESSION['username'])) {
         }
 
         .container {
-            background: white;
+            background: #9EB1C5;
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
             padding: 30px;
             text-align: center;
             width: 380px;
             animation: fadeIn 1.2s ease;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
         }
 
         video,
@@ -66,20 +63,41 @@ if (!isset($_SESSION['username'])) {
             animation: fadeIn 1s ease;
         }
 
-        button {
-            margin-top: 15px;
-            padding: 12px 20px;
+        .btn-hover {
+            width: 200px;
             font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
+            font-weight: 600;
+            color: #84572f;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            margin: 20px;
+            height: 55px;
+            text-align: center;
+            border: none;
+            background-size: 300% 100%;
+            background-color: #C5D1DF;
+
+            border-radius: 50px;
+            moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .btn-hover:hover {
+            background-position: 100% 0;
+            moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+
+        .btn-hover:focus {
+            outline: none;
+        }
+
+        .btn-hover.color {
+            background-image: linear-gradient(to right, #9EB1C5, #7f9ddf, #C5D1DF, #9EB1C5);
+            box-shadow: 0 4px 15px 0 #6586cb;
         }
 
         #status {
@@ -112,11 +130,11 @@ if (!isset($_SESSION['username'])) {
 <body>
     <button class="back-btn" onclick="goBack()">← Back</button>
     <div class="container">
-        <h2>Set Up Your Face ID</h2>
+        <h2 style="color:#84572f;">Set Up Your Face ID</h2>
         <video id="video" autoplay></video>
         <canvas id="canvas" style="display: none;"></canvas>
         <img id="preview" style="display:none;" />
-        <button onclick="captureImage()">Capture Face</button>
+        <button class="btn-hover" onclick="captureImage()">Capture Face</button>
 
         <p id="status"></p>
     </div>

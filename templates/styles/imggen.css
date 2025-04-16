@@ -7,9 +7,9 @@ body{
     flex-direction: row; 
     justify-content: center; 
     align-items: center; 
-    height: 120vh; 
-    width: 100vw; 
-    overflow: hidden;
+    height: 100%; 
+    width: 100%; 
+    overflow: auto;
     background-color: #f5ec89;
     background-image: url(http://www.transparenttextures.com/patterns/brushed-alum-dark.png);
 }
