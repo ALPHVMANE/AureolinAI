@@ -28,6 +28,7 @@
                     <li><a href="./asc_gamestart.php">New Game</a></li>
                 </ul>
             </li>
+            <li><a href="../../../templates/userProfile.php">User Profile</a></li>
             <li><a href="../../../src/features/faceid/setupfaceid.php">Set Up Face ID</a></li>
             <li><a href="../../../templates/faceLogin.html">Login</a></li>
             <li><a href="../../../public/index.php">Sign Out</a></li>

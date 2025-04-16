@@ -83,7 +83,7 @@
         <div class="feedback" id="feedback"></div> <!-- Feedback placeholder -->
         <div class="buttons">
             <button class="green" onclick="wrongAnswer()">Cabane</button>
-            <button class="yellow" onclick="correctAnswer()">Masion</button>
+            <button class="yellow" onclick="correctAnswer()">Maison</button>
             <button class="red" onclick="wrongAnswer()">Hôtel</button>
             <button class="blue" onclick="wrongAnswer()">Appartement</button>
             <br>
