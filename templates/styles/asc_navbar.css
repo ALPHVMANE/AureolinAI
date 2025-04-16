@@ -1,105 +1,141 @@
-.navbar .navbar {
+.navbar-wrapper {
     width: 100%;
+    background-color: #9EB1C5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-wrapper .navbar {
+    background-color: transparent;
+    max-width: 1200px;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #7DB3F2; /* Navbar background */
     position: relative;
     z-index: 10;
 }
 
-/* Logo Container */
-.navbar .logo {
+.logo {
     display: flex;
     align-items: center;
-    gap: 5px; /* Controls space between logo and text */
+    gap: 5px;
 }
 
-/* Logo Image */
-.navbar .logo img {
-    height: 40px;
-    width: auto;
-    max-width: 100px;
+.logo img {
+    height: auto;
+    width: 220px;
+    max-height: 60px;
     object-fit: contain;
     display: inline-block;
     vertical-align: middle;
+    border: none;
 }
 
-/* Navbar Links */
-.navbar .nav-links {
+.logo a {
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.logo a:hover {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+/* Navigation Links */
+.nav-links {
     display: flex;
     list-style: none;
-    margin-left: auto; /* Push links to the right */
+    margin-left: auto;
 }
 
-.navbar .nav-links li {
-    margin-left: 15px; /* Space between links */
+.nav-links li {
+    margin-left: 15px;
 }
 
-.navbar .nav-links > li > a:hover {
-    border: 2px solid yellow;
-    border-radius: 5px;
-    background-color: #7DB3F2;
-}
-
-/* Navbar Links Text Styling */
-.navbar .nav-links a {
+.nav-links a {
     text-decoration: none;
-    color: black;
+    color: #84572f;
     font-size: 1rem;
+    padding: 8px 16px; /* keep equal padding */
+    transition: all 0.2s ease-in-out;
 }
 
-/* Navbar Link Hover Effect */
-nav a {
-    text-decoration: none; /* Remove default underline */
-    color: white;
-    padding: 10px 15px; /* Padding for links */
-    transition: all 0.navbar .3s ease-in-out;
-}
-
-nav a:hover {
-    border: 2px solid yellow; /* Hover effect border */
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.navbar .2);
+.nav-links > li > a:hover {
+    background-color: #C5D1DF;
+    border: 3px solid #84572f;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #84572f;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s ease-in-out;
 }
 
 /* Dropdown Menu */
-.navbar .dropdown {
+.dropdown {
     position: relative;
 }
 
-.navbar .dropdown-menu {
+.dropdown-menu {
     display: none;
     position: absolute;
-    background-color: #7DB3F2;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.navbar .1);
+    background-color: #C5D1DF;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 10px;
 }
 
-.navbar .dropdown-menu li {
+.dropdown-menu li {
     margin: 5px 0;
 }
 
-.navbar .dropdown-menu a {
-    color: black;
+.dropdown-menu a {
+    display: block;
+    padding: 8px 16px;
+    color: #84572f;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
 }
 
-.navbar .dropdown:hover .navbar .dropdown-menu {
+.dropdown-menu a:hover {
+    background-color: #C5D1DF;
+    border: 2px solid #84572f;
+    border-radius: 6px;
+    font-weight: normal;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
     display: block;
 }
 
-/* Hamburger Menu for Mobile */
-.navbar .hamburger {
+/* Hamburger for Mobile */
+.hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
 }
 
-.navbar .hamburger span {
-    background-color: black;
+.hamburger span {
+    background-color: #84572f;
     height: 3px;
     width: 25px;
     margin: 4px 0;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active + .nav-links {
+        display: flex;
+    }
 }

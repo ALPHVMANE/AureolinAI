@@ -51,72 +51,17 @@ $fact = $facts[date('z') % count($facts)];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aureolin - Home</title>
 
-    <link rel="stylesheet" href="../../../templates/styles/asc_style.css">
+    <link rel="stylesheet" href="../../../templates/styles/asc_navbar.css">
+    <link rel="stylesheet" href="../../../templates/styles/asc_widget.css">
     <script src="../../../templates/js/UX/asc_script.js"></script>
     
     <style>
         body {
-            background-color: #2b2e35;
+            background-color: #ddd498;
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-        }
-
-        .dashboard-widgets {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            margin: 60px auto;
-            max-width: 1100px;
-            padding: 0 20px;
-        }
-
-        .widget {
-            background-color: #444;
-            color: white;
-            padding: 20px 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            min-width: 280px;
-            flex: 1;
-        }
-
-        .xp-bar {
-            width: 100%;
-            height: 8px;
-            background-color: #ccc;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .xp-progress {
-            height: 100%;
-            background-color: #fbc02d;
-            width: <?php echo min(100, ($xp % 100)); ?>%
-        }
-
-        .quiz button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 6px;
-            border: none;
-        }
-
-        .correct { background-color: #4CAF50; }
-        .wrong { background-color: #f44336; }
-
-        .streak {
-            font-size: 20px;
-            font-weight: bold;
-            color: #FFD700;
-            text-align: center;
         }
     </style>
 </head>

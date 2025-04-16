@@ -13,8 +13,8 @@
 
 /* Footer styles */
 .footer {
-    background-color: #222;
-    color: white;
+    background-color: #9EB1C5;
+    color: #84572f;
     text-align: center;
     padding: 15px 0;
     width: 100%;
@@ -40,7 +40,7 @@
 }
 
 .footer-links a {
-    color: #AFC1D6;
+    color: #84572f;
     text-decoration: none;
     font-size: 14px;
 }

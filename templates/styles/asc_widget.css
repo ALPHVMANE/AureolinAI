@@ -1,0 +1,76 @@
+.dashboard-widgets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin: 60px auto;
+    max-width: 1100px;
+    padding: 0 20px;
+}
+
+.widget {
+    background-color: #9EB1C5;
+    color: #84572f;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    min-width: 280px;
+    flex: 1;
+}
+
+.widget h2,
+.widget h3 {
+    color: #84572f;
+    margin-bottom: 10px;
+}
+
+/* XP Bar */
+.xp-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.xp-progress {
+    height: 100%;
+    background-color: #fbc02d;
+}
+
+/* Quiz Buttons */
+.quiz button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: none;
+    background-color: #fff;
+    color: #84572f;
+    font-weight: bold;
+}
+
+.quiz button:hover {
+    background-color: #C5D1DF;
+}
+
+.correct {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+.wrong {
+    background-color: #f44336 !important;
+    color: white !important;
+}
+
+.streak {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFD700;
+    text-align: center;
+}

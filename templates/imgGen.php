@@ -1,3 +1,8 @@
+<?php
+// imgGen.php (top of file or just before include)
+$page_context = 'imgGen';
+include '../src/features/UX/asc_navbar.php';
+?>
 <?php  
 require_once '../config/API/imggen.ai/config.php';
 include '../src/features/imggen/img_get.php';
@@ -50,8 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
     <link rel="stylesheet" href="../templates/styles/asc_navbar.css"/>
     <link rel="stylesheet" href="../templates/styles/loading.css"/>
     <link rel="stylesheet" href="../templates/styles/imggen.css"/>
+    
+    
 </head>
 <body>
+
+
     <div id="loading" class="loading">
         <figure>
             <div class="loading-dot loading-white"></div>
