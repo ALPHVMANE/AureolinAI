@@ -1,8 +1,3 @@
-<?php
-// imgGen.php (top of file or just before include)
-$page_context = 'imgGen';
-include '../src/features/UX/asc_navbar.php';
-?>
 <?php  
 require_once '../config/API/imggen.ai/config.php';
 include '../src/features/imggen/img_get.php';
@@ -56,11 +51,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
     <link rel="stylesheet" href="../templates/styles/loading.css"/>
     <link rel="stylesheet" href="../templates/styles/imggen.css"/>
     
-    
 </head>
 <body>
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../src/features/UX/asc_dashboard.php">
+                <img src="../public/images/FullNameLogo.png" alt="Aureolin Logo">
+                    <span class="logo-text"></span>
+                </a>
+            </div>
 
+            <ul class="nav-links">
+                <li><a href="./imgGen.php">Image Generation</a></li>
+                <li class="dropdown">
+                    <a href="#">Learning ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../src/features/UX/asc_gamestart.php">New Game</a></li>
+                    </ul>
+                </li>
+                <li><a href="./userProfile.php">User Profile</a></li>
+                <li><a href="../src/features/faceid/setupfaceid.php">Set Up Face ID</a></li>
+                <li><a href="./faceLogin.html">Login</a></li>
+                <li><a href="../public/index.php">Sign Out</a></li>
+            </ul>
 
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
     <div id="loading" class="loading">
         <figure>
             <div class="loading-dot loading-white"></div>
