@@ -1,25 +1,14 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body{
+    overflow: hidden;
 }
-
-html, body {
-    height: 100%;
-    width: 100%;
-    background-color: #f5ec89;
-    background-image: url(http://www.transparenttextures.com/patterns/brushed-alum-dark.png);
-    font-family: 'Poppins', sans-serif;
-}
-
-.imggen-container{
+.imggen-container {
     font-family: 'Poppins', sans-serif; 
     display: flex;
     flex-direction: row; 
     justify-content: center; 
     align-items: center; 
-    height: 100vh; 
-    width: 100vw; 
+    height: 100%; 
+    width: 100%; 
     overflow: auto;
     background-color: #f5ec89;
     background-image: url(http://www.transparenttextures.com/patterns/brushed-alum-dark.png);
@@ -81,7 +70,14 @@ html, body {
 .img-prompt:focus {
     border-color: #e2b547; 
   }
-
+.imggen-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* background: rgba(6, 3, 37, 0.7); */
+    padding: 15px;
+}
 
 .img-display{
     border-radius: 15px;
