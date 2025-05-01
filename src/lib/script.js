@@ -2,12 +2,12 @@ const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const displaySize = { width: 600, height: 400 };
 Promise.all([
-  //faceapi.nets.ssdMobilenetv1.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //detect face
-  //faceapi.nets.faceRecognitionNet.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //extract face description 
-  //faceapi.nets.faceLandmark68Net.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //detect facelandmark (eyes, nose, ...)
-  faceapi.nets.ssdMobilenetv1.loadFromUri("../../config/API/models/"),
-  faceapi.nets.faceRecognitionNet.loadFromUri("../../config/API/models/"),
-  faceapi.nets.faceLandmark68Net.loadFromUri("../../config/API/models/")
+  faceapi.nets.ssdMobilenetv1.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //detect face
+  faceapi.nets.faceRecognitionNet.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //extract face description 
+  faceapi.nets.faceLandmark68Net.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //detect facelandmark (eyes, nose, ...)
+  //faceapi.nets.ssdMobilenetv1.loadFromUri("../../config/API/models/"),
+  //faceapi.nets.faceRecognitionNet.loadFromUri("../../config/API/models/"),
+  //faceapi.nets.faceLandmark68Net.loadFromUri("../../config/API/models/")
   ])
   .then(startWebcam)
   .catch((err) => {

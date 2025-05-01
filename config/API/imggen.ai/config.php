@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] .'/AureolinAI/env.php';
+include 'C:\Users\TimGFM\Documents\GitHub\AureolinAI\.env';
 function callAPI($method, $url, $data, $headers = []) {
     $curl = curl_init();
     echo "<script>console.log('callAPI argument: $data');</script>";
