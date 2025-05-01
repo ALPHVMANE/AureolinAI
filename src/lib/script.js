@@ -1,15 +1,17 @@
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const displaySize = { width: 600, height: 400 };
-
 Promise.all([
-  faceapi.nets.ssdMobilenetv1.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //detect face
-  faceapi.nets.faceRecognitionNet.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //extract face description 
-  faceapi.nets.faceLandmark68Net.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //detect facelandmark (eyes, nose, ...)
-])
+  //faceapi.nets.ssdMobilenetv1.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //detect face
+  //faceapi.nets.faceRecognitionNet.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //extract face description 
+  //faceapi.nets.faceLandmark68Net.loadFromUri("https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights"), //detect facelandmark (eyes, nose, ...)
+  faceapi.nets.ssdMobilenetv1.loadFromUri("../../config/API/models/"),
+  faceapi.nets.faceRecognitionNet.loadFromUri("../../config/API/models/"),
+  faceapi.nets.faceLandmark68Net.loadFromUri("../../config/API/models/")
+  ])
   .then(startWebcam)
   .catch((err) => {
-    alert("Error loading models: " + err);
+    ("Error loading models: " + err);
   });
 
 function startWebcam() {
@@ -19,7 +21,7 @@ function startWebcam() {
       audio: false,
     })
     .then((stream) => {
-      alert("Webcam started! Please wait 30 seconds");
+      alert("Webcam started! Please wait 10 seconds");
       video.srcObject = stream;
     })
     .catch((error) => {
@@ -94,8 +96,10 @@ video.addEventListener("play", async () => {
   }
 
   const labeledFaceDescriptors = await getLabeledFaceDescriptions();
-  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors);
-
+  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.5);
+  let lastMatchLabel = null;
+  let matchCount = 0;
+  const REQUIRED_MATCHES = 4;
   // Create the face tracker
   faceapi.matchDimensions(canvas, displaySize);
 
@@ -122,8 +126,27 @@ video.addEventListener("play", async () => {
         });
         drawBox.draw(canvas);        
         if (result.label !== "unknown") {
-          loginUser(result.label);
-        }        
+          if (result.label === lastMatchLabel) {
+            matchCount++;
+          } else {
+            lastMatchLabel = result.label;
+            matchCount = 1;
+          }
+        
+          if (matchCount >= REQUIRED_MATCHES) {
+            loginUser(result.label);
+            // Reset to prevent multiple logins
+            lastMatchLabel = null;
+            matchCount = 0;
+          }
+        
+          console.log(`Detected ${result.label} ${matchCount}/${REQUIRED_MATCHES} times`);
+        } else {
+          // Reset if face is unknown or changes
+          lastMatchLabel = null;
+          matchCount = 0;
+        }
+        
       });
     } else {
       console.log("No faces detected.");
